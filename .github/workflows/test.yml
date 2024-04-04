@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,15 +20,8 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm install
-      # - name: Run tests
-      #   run: npm test
-      # - name: Build application
-      #   run: npm run build
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: build-output
-      #     path: build/
+      - name: Build application
+        run: npm run build
 
   deploy-staging:
     name: Deploy to Staging Environment
@@ -38,10 +31,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build-output
       - name: Deploy to staging environment
         run: |
           # Add your deployment steps for the staging environment here
@@ -55,10 +44,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build-output
       - name: Deploy to production environment
         run: |
           # Add your deployment steps for the production environment here

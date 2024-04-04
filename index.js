@@ -5,5 +5,3 @@ function greet(name) {
   console.log(greet("World"));
   
   module.exports = greet;
-
-  // test
