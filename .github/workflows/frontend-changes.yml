@@ -20,12 +20,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Check frontend changes on push
-        if: github.event_name == 'push'
         run: |
           echo "Changes detected in the frontend directory on push."
 
       - name: Check frontend changes on PR merge
-        if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Changes detected in the frontend directory after merging PR."
 
