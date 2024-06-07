@@ -1,0 +1,28 @@
+name: Backend Changes Workflow
+
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+
+jobs:
+  backend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check backend changes on push
+        if: github.event_name == 'push'
+        run: |
+          echo "Changes detected in the backend directory on push."
+
+      - name: Check backend changes on PR merge
+        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        run: |
+          echo "Changes detected in the backend directory after merging PR."
